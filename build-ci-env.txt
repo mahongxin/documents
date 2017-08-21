@@ -1,0 +1,25 @@
+1. 自动化测试中测试流程
+    boot完之后，自动通过ssh登录板子，自动进行测试
+
+2. 本地调试步骤
+    1) 启动板子，再查看ip , 用ssh 登录 root /root
+    2) 下载 https://github.com/AlamelaLiu/test-definitions.git  准备测试环境(lava1的环境,后续lava2会有所变化)
+    git clone https://git.linaro.org/qa/test-definitions.git -b rpb-16.12
+    cd test-definitions
+    . ./automated/bin/setenv.sh
+   【https://github.com/luckyxinshidai/etesting/blob/master/source/_posts/How-to-install-pip.md怎么安装pip】
+    wget https://bootstrap.pypa.io/get-pip.py    pip也是一种管理工具
+    python get-pip.py
+    pip install -r ${REPO_PATH}/automated/utils/requirements.txt
+    cd ~
+
+lava_server: 
+    (注意:采用自己的账号)
+    scp -r liucaili@192.168.3.100:/usr/lib/python2.7/dist-packages/lava_dispatcher/lava_test_shell .
+    chmod 777 -R lava_test_shell
+    export PATH=/root/lava_test_shell:$PATH
+    echo $PATH
+    cd test-definitions
+
+3) 下载 https://github.com/AlamelaLiu/ci-test-cases.git case测试脚本
+    git clone https://github.com/EstuaryTestTeam/ci-test-cases.git
